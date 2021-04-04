@@ -4,11 +4,14 @@ import math
 
 def main_fun():
 
-    global lower
     lower = int(lower_ent.get())
 
-    global upper
-    upper = int(upper_ent.get())
+    upper = int(upper_ent.get())    
+
+    global x
+    x = random.randint(lower, upper)
+
+
 
     global horizontal
     horizontal = Scale(window,from_ = lower,to = upper,orient = HORIZONTAL)
@@ -25,34 +28,39 @@ def main_fun():
 
 
 def res_fun():
+
+    global count
+    count += 1
     
-    x = random.randint(lower, upper)
+    # count = 0
     
-    count = 0
-    
-    while count < math.log(upper - lower + 1, 2):
-        count += 1
+    # while count < math.log(upper - lower + 1, 2):
+    #     count += 1
      
+    lower = int(lower_ent.get())
+    upper = int(upper_ent.get())
 
-        if x == horizontal.get():
-            txt = "Congratulations you did it in ",count, " try"
+    if x == horizontal.get():
+        txt = "Congratulations you did it in ",count, " try"
 
-            break
-        elif x > horizontal.get():
-            txt = "You guessed too small!"
-        elif x < horizontal.get():
-            txt = "You Guessed too high!"
+            
+    elif x > horizontal.get():
+        txt = "You guessed too small!"
+    elif x < horizontal.get():
+        txt = "You Guessed too high!"
 
-        if count >= math.log(upper - lower + 1, 2):
-            txt = "\nThe number is %d" % x,"\tBetter Luck Next time!"
+    if count >= math.log(upper - lower + 1, 2):
+        txt = "\nThe number is %d" % x,"\tBetter Luck Next time!"
         
-        messagebox.showinfo('Result',txt)
+    messagebox.showinfo('Result',txt)
 
 
 window = Tk()
 window.title('Number guessing game')
 
 main_frm = LabelFrame(window).grid(row = 0, column = 0, padx = 10, pady = 10)
+
+count = 0
 
 lower_lbl = Label(main_frm,text = 'Enter your lower bound ===>').grid(row = 0, column = 0, padx = 10, pady = 10)
 lower_ent = Entry(main_frm)
